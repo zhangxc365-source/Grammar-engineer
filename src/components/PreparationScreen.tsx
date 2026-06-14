@@ -63,83 +63,74 @@ export const PreparationScreen: React.FC<PreparationScreenProps> = ({
                 className="p-4 bg-indigo-50/40 border border-indigo-150 rounded-2xl hover:bg-slate-50/70 hover:border-indigo-300 hover:shadow-md transition-all relative overflow-hidden"
                 id={`broken-pipeline-${task.id}`}
               >
-                {/* Visual badge top right representing status */}
+                {/* Visual subtle badge background element */}
                 <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-indigo-50 to-indigo-100 rotate-45 translate-x-8 -translate-y-8 select-none border-b border-indigo-200 opacity-40" />
 
                 {/* Grid Split: Left (Character, Pinyin, English) vs Right (Collocation Block) */}
-                <div className="grid grid-cols-1 sm:grid-cols-[1.2fr_1.8fr] gap-4 items-center w-full z-10 relative">
+                <div className="grid grid-cols-1 xs:grid-cols-[1.1fr_1.9fr] gap-3 items-center w-full z-10 relative">
                   
-                  {/* Left Column: Chinese Character, Pinyin, English stacked vertically with flex-col items-center */}
-                  <div className="flex items-center gap-3.5 text-left sm:border-r sm:border-indigo-150/70 sm:pr-4 justify-center sm:justify-start">
+                  {/* Left Column: Chinese Character, Pinyin, English stacked vertically */}
+                  <div className="flex items-center gap-3 text-left border-b xs:border-b-0 xs:border-r border-indigo-150/70 pb-3 xs:pb-0 xs:pr-3 justify-center xs:justify-start">
                     <div className="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center shrink-0 text-xs font-black font-mono shadow-sm select-none">
                       {index + 1}
                     </div>
                     
-                    {/* Left container: flex flex-col items-center rendering with three levels */}
                     <div className="flex flex-col items-center text-center justify-center">
-                      {/* First line: Pinyin (increased to text-lg text-slate-700 font-bold) */}
-                      <span className="text-lg text-slate-700 font-mono leading-none mb-1 select-all font-bold">
+                      <span className="text-base text-slate-700 font-mono leading-none mb-1 select-all font-bold">
                         {task.prototype ? getChPinyin(task.prototype) : (correctNoun ? getChPinyin(correctNoun.char) : "")}
                       </span>
-                      {/* Second line: Hanzi (increased to text-2xl sm:text-4xl font-black) */}
-                      <span className="text-2xl sm:text-4xl font-black text-slate-800 leading-none mb-1.5 select-none animate-fadeIn">
+                      <span className="text-2xl sm:text-3xl font-black text-slate-800 leading-none mb-1 select-none animate-fadeIn">
                         {task.prototype ? task.prototype : (correctNoun?.char || "")}
                       </span>
-                      {/* Third line: English / Translated representation */}
-                      <span className="text-sm text-slate-500 leading-tight select-all font-semibold">
+                      <span className="text-xs text-slate-500 leading-tight select-all font-semibold">
                         {task.prototype ? getPrototypeTranslation(task.prototype, language) : (correctNoun?.translations?.[language] || correctNoun?.translations?.en || "")}
                       </span>
                     </div>
                   </div>
 
-                  {/* Right Column: Collocation Block with outer flex-center components and small-font Pinyin */}
-                  <div className="flex items-end flex-wrap gap-1 bg-white p-2.5 sm:p-3 rounded-2xl border border-indigo-100 shadow-sm max-w-fit sm:pl-3 mx-auto sm:mx-0">
+                  {/* Right Column: Collocation Block - strictly Single Horizontal Line Row (flex-nowrap) to fit completely side-by-side */}
+                  <div className="flex items-center justify-center flex-nowrap gap-1 bg-white p-2 rounded-2xl border border-indigo-100/70 shadow-sm shrink-0 overflow-x-auto max-w-full">
                     
-                    {/* Verb Part: flex flex-col items-center */}
-                    <div className="flex flex-col items-center">
-                      {/* First line: Pinyin (increased to text-sm and text-slate-600 font-extrabold) */}
-                      <span className="text-sm text-slate-600 font-mono font-extrabold leading-none lowercase mb-1.5 select-none text-center">
+                    {/* Verb part */}
+                    <div className="flex flex-col items-center shrink-0">
+                      <span className="text-[10px] text-slate-500 font-mono font-extrabold leading-none lowercase mb-1 select-none text-center">
                         {correctVerb?.pinyin || ""}
                       </span>
-                      {/* Second line: Hanzi (original box style, slightly enlarged font) */}
-                      <div className="px-3.5 py-2.5 min-w-[62px] bg-slate-50 border border-slate-150 rounded-xl text-center flex items-center justify-center">
-                        <span className="text-2xl sm:text-4xl font-black text-slate-800 leading-none">
+                      <div className="px-2 py-1.5 min-w-[48px] bg-slate-50 border border-slate-150 rounded-xl text-center flex items-center justify-center shadow-sm">
+                        <span className="text-lg sm:text-xl font-black text-slate-800 leading-none">
                           {correctVerb?.char || "?"}
                         </span>
                       </div>
                     </div>
 
-                    <span className="text-indigo-400 font-black text-sm select-none px-1 pb-3.5 font-mono">+</span>
+                    <span className="text-indigo-400 font-black text-xs select-none px-0.5 pb-1 text-center font-mono shrink-0">+</span>
 
-                    {/* Classifier Part: flex flex-col items-center */}
-                    <div className="flex flex-col items-center">
-                      {/* First line: Pinyin (increased to text-sm and text-emerald-700 font-extrabold) */}
-                      <span className="text-sm text-emerald-700 font-mono font-extrabold leading-none lowercase mb-1.5 select-none text-center">
+                    {/* Classifier part */}
+                    <div className="flex flex-col items-center shrink-0">
+                      <span className="text-[10px] text-emerald-700 font-mono font-extrabold leading-none lowercase mb-1 select-none text-center">
                         {correctClassifier ? getChPinyin(correctClassifier.char) : ""}
                       </span>
-                      {/* Second line: Hanzi (original box style, slightly enlarged font) */}
-                      <div className="px-3.5 py-2.5 min-w-[64px] bg-emerald-50 border border-emerald-150 rounded-xl text-center flex items-center justify-center">
-                        <span className="text-2xl sm:text-4xl font-black text-emerald-800 leading-none">
+                      <div className="px-2 py-1.5 min-w-[48px] bg-emerald-50 border border-emerald-150 rounded-xl text-center flex items-center justify-center shadow-sm">
+                        <span className="text-lg sm:text-xl font-black text-emerald-800 leading-none">
                           {correctClassifier?.char || "?"}
                         </span>
                       </div>
                     </div>
 
-                    <span className="text-indigo-400 font-black text-sm select-none px-1 pb-3.5 font-mono">+</span>
+                    <span className="text-indigo-400 font-black text-xs select-none px-0.5 pb-1 text-center font-mono shrink-0">+</span>
 
-                    {/* Noun Part: flex flex-col items-center */}
-                    <div className="flex flex-col items-center">
-                      {/* First line: Pinyin (increased to text-sm and text-slate-600 font-extrabold) */}
-                      <span className="text-sm text-slate-600 font-mono font-extrabold leading-none lowercase mb-1.5 select-none text-center">
+                    {/* Noun part */}
+                    <div className="flex flex-col items-center shrink-0">
+                      <span className="text-[10px] text-slate-500 font-mono font-extrabold leading-none lowercase mb-1 select-none text-center">
                         {correctNoun?.pinyin || ""}
                       </span>
-                      {/* Second line: Hanzi (original box style, slightly enlarged font) */}
-                      <div className="px-3.5 py-2.5 min-w-[62px] bg-slate-50 border border-slate-150 rounded-xl text-center flex items-center justify-center">
-                        <span className="text-2xl sm:text-4xl font-black text-slate-800 leading-none">
+                      <div className="px-2 py-1.5 min-w-[48px] bg-slate-50 border border-slate-150 rounded-xl text-center flex items-center justify-center shadow-sm">
+                        <span className="text-lg sm:text-xl font-black text-slate-800 leading-none">
                           {correctNoun?.char || "?"}
                         </span>
                       </div>
                     </div>
+
                   </div>
 
                 </div>

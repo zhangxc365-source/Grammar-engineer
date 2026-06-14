@@ -9,7 +9,53 @@ import { VERBS, CLASSIFIERS, NOUNS } from "../data";
 import { Cpu, Droplets, ShowerHead } from "lucide-react";
 import { motion } from "motion/react";
 
-const pipeMazeBgSrc = new URL("../assets/images/pipe_maze_bg_1781308872176.jpg", import.meta.url).href;
+const backgroundOptions = [
+  // --- BLUE GROUP ---
+  {
+    id: "blue_base",
+    group: "blue",
+    nameCn: "经典探索蓝",
+    nameEn: "Classic Explore Blue",
+    src: new URL("../assets/images/pipe_maze_bg_1781308872176.jpg", import.meta.url).href,
+    color: "#02040a"
+  },
+  {
+    id: "blue_isometric",
+    group: "blue",
+    nameCn: "等轴空间蓝",
+    nameEn: "Isometric Spatial Blue",
+    src: new URL("../assets/images/pipe_maze_blue_isometric_1781446800327.jpg", import.meta.url).href,
+    color: "#01020a"
+  },
+
+  // --- GREEN GROUP ---
+  {
+    id: "cyan_base",
+    group: "green",
+    nameCn: "霓虹极光绿",
+    nameEn: "Neon Aurora Green",
+    src: new URL("../assets/images/pipe_maze_neon_cyan_1781398249174.jpg", import.meta.url).href,
+    color: "#010309"
+  },
+  {
+    id: "emerald_base",
+    group: "green",
+    nameCn: "翡翠地平线",
+    nameEn: "Emerald Mint Green",
+    src: new URL("../assets/images/maze_emerald_1781398494530.jpg", import.meta.url).href,
+    color: "#010403"
+  },
+
+  // --- YELLOW GROUP ---
+  {
+    id: "amber_base",
+    group: "yellow",
+    nameCn: "熔岩能量黄",
+    nameEn: "Lava Amber Gold",
+    src: new URL("../assets/images/pipe_maze_amber_glow_1781398268160.jpg", import.meta.url).href,
+    color: "#030208"
+  }
+];
 
 interface PipelineCanvasProps {
   language: LanguageCode;
@@ -24,6 +70,12 @@ export const PipelineCanvas: React.FC<PipelineCanvasProps> = ({
   onSelectNode,
   activeNodeId
 }) => {
+  // Select active background theme, randomizing default on mount for a super fresh student experience!
+  const [bgIndex] = React.useState(() => {
+    return Math.floor(Math.random() * backgroundOptions.length);
+  });
+
+  const currentBg = backgroundOptions[bgIndex] || backgroundOptions[0];
   // Calculates water flow segments dynamically for any number of pipes!
   const segmentFlow: boolean[] = [true];
   let accumulatedOk = true;
@@ -113,7 +165,7 @@ export const PipelineCanvas: React.FC<PipelineCanvasProps> = ({
       {/* 2. BACKGROUND & MAZE VECTOR GRAPHICS (1000 x 600 Grid ViewBox for Desktop) */}
       <div 
         className="relative hidden md:block w-full h-[720px] rounded-[24px] overflow-hidden border-2 border-slate-900 bg-cover bg-no-repeat bg-center transition-all duration-300"
-        style={{ backgroundImage: `url(${pipeMazeBgSrc})`, backgroundColor: "#02040a" }}
+        style={{ backgroundImage: `url(${currentBg.src})`, backgroundColor: currentBg.color }}
         id="desktop-blueprint-vector-layout"
       >
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1000 600" preserveAspectRatio="none">
