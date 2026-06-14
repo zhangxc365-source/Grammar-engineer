@@ -1,0 +1,6 @@
+{
+  "name": "语法工程师 (Grammar Engineer)",
+  "description": "An interactive language-learning game for YCT 2-4 students to master Chinese grammar rules (Verb + Classifier + Noun) through industrial pipe-repair mechanics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
