@@ -9,6 +9,13 @@ import { VERBS, CLASSIFIERS, NOUNS } from "../data";
 import { Cpu, Droplets, ShowerHead } from "lucide-react";
 import { motion } from "motion/react";
 
+// Import backgrounds statically to guarantee perfect resolution on GitHub Pages / production builds
+import pipeMazeBg from "../assets/images/pipe_maze_bg_1781308872176.jpg";
+import pipeMazeBlueIsometric from "../assets/images/pipe_maze_blue_isometric_1781446800327.jpg";
+import pipeMazeNeonCyan from "../assets/images/pipe_maze_neon_cyan_1781398249174.jpg";
+import mazeEmerald from "../assets/images/maze_emerald_1781398494530.jpg";
+import pipeMazeAmberGlow from "../assets/images/pipe_maze_amber_glow_1781398268160.jpg";
+
 const backgroundOptions = [
   // --- BLUE GROUP ---
   {
@@ -16,7 +23,7 @@ const backgroundOptions = [
     group: "blue",
     nameCn: "经典探索蓝",
     nameEn: "Classic Explore Blue",
-    src: new URL("../assets/images/pipe_maze_bg_1781308872176.jpg", import.meta.url).href,
+    src: pipeMazeBg,
     color: "#02040a"
   },
   {
@@ -24,7 +31,7 @@ const backgroundOptions = [
     group: "blue",
     nameCn: "等轴空间蓝",
     nameEn: "Isometric Spatial Blue",
-    src: new URL("../assets/images/pipe_maze_blue_isometric_1781446800327.jpg", import.meta.url).href,
+    src: pipeMazeBlueIsometric,
     color: "#01020a"
   },
 
@@ -34,7 +41,7 @@ const backgroundOptions = [
     group: "green",
     nameCn: "霓虹极光绿",
     nameEn: "Neon Aurora Green",
-    src: new URL("../assets/images/pipe_maze_neon_cyan_1781398249174.jpg", import.meta.url).href,
+    src: pipeMazeNeonCyan,
     color: "#010309"
   },
   {
@@ -42,7 +49,7 @@ const backgroundOptions = [
     group: "green",
     nameCn: "翡翠地平线",
     nameEn: "Emerald Mint Green",
-    src: new URL("../assets/images/maze_emerald_1781398494530.jpg", import.meta.url).href,
+    src: mazeEmerald,
     color: "#010403"
   },
 
@@ -52,7 +59,7 @@ const backgroundOptions = [
     group: "yellow",
     nameCn: "熔岩能量黄",
     nameEn: "Lava Amber Gold",
-    src: new URL("../assets/images/pipe_maze_amber_glow_1781398268160.jpg", import.meta.url).href,
+    src: pipeMazeAmberGlow,
     color: "#030208"
   }
 ];
